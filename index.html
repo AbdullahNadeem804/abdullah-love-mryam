@@ -1,0 +1,584 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdullah ❤️ Maryam - Love Forever</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #100613;
+    color: white;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(circle at 20% 20%, #762044, transparent 40%),
+      radial-gradient(circle at 80% 80%, #49135d, transparent 40%),
+      linear-gradient(135deg, #100613, #260c29, #120616);
+}
+
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.music {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 20;
+    border: 1px solid #ff9cc8;
+    background: #e8327c;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ff3b91;
+}
+
+.page {
+    min-height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 35px 20px;
+    animation: appear 1s ease;
+}
+
+.page.active { display: flex; }
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.small {
+    color: #ffacd0;
+    letter-spacing: 4px;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: clamp(35px, 7vw, 70px);
+    color: #ff91c1;
+    text-shadow: 0 0 25px #ff2587;
+    margin: 15px 0;
+}
+
+h2 {
+    color: #ff9bc9;
+    font-size: clamp(27px, 5vw, 42px);
+    margin-bottom: 25px;
+}
+
+p {
+    color: #ffe1ee;
+    line-height: 1.9;
+    font-size: 17px;
+}
+
+.big-heart {
+    font-size: clamp(140px, 35vw, 230px);
+    cursor: pointer;
+    filter: drop-shadow(0 0 25px #ff1b79);
+    animation: beat 1.2s infinite;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.big-heart:hover {
+    transform: scale(1.12);
+}
+
+@keyframes beat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.13); }
+}
+
+.btn {
+    border: none;
+    background: linear-gradient(45deg, #e52b79, #ff8abe);
+    color: white;
+    padding: 14px 35px;
+    border-radius: 40px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    box-shadow: 0 0 25px #ff3c91;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px #ff74b3;
+}
+
+.names {
+    font-size: clamp(32px, 7vw, 65px);
+    color: #ff9dc9;
+    text-shadow: 0 0 25px #ff308b;
+    margin: 25px 0;
+}
+
+.names span { color: white; }
+
+.romantic-word {
+    font-size: clamp(45px, 10vw, 85px);
+    color: #ff9ac7;
+    text-shadow: 0 0 30px #ff2388;
+    animation: beat 2s infinite;
+    margin: 25px 0;
+}
+
+.message {
+    max-width: 750px;
+    padding: 35px 25px;
+    background: #ffffff0d;
+    border: 1px solid #ff86bb66;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #f735861b;
+    line-height: 2;
+}
+
+.message p { margin: 15px 0; }
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 30px;
+}
+
+.photo {
+    border: 2px solid #ff86b8;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #3b1334;
+    box-shadow: 0 0 20px #ff338544;
+    transition: 0.4s;
+}
+
+.photo:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px #ff3d98;
+}
+
+.photo img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+}
+
+.photo p {
+    padding: 15px;
+    color: #ffb1d1;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 10px;
+    color: #ff9bc8;
+    background: #0d0410;
+    line-height: 2;
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+    color: #ff6fae;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+    z-index: 5;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@media(max-width:500px) {
+    .message { padding: 25px 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<button class="music" id="musicBtn" onclick="toggleMusic()">
+🎵 Play Romantic Music
+</button>
+
+<!-- PAGE 1: BIG HEART -->
+<div class="page active" id="page1">
+
+    <div class="small">A LITTLE WORLD OF LOVE</div>
+
+    <p>Maryam, I have something special for you... 💗</p>
+
+    <div class="big-heart" onclick="nextPage(2)">❤️</div>
+
+    <h2>Touch My Heart</h2>
+
+    <p>Click the heart to open your surprise!</p>
+
+</div>
+
+<!-- PAGE 2: NAMES -->
+<div class="page" id="page2">
+
+    <div class="small">TWO NAMES, ONE BEAUTIFUL STORY</div>
+
+    <div class="names">
+        Abdullah <span>❤️</span> Maryam
+    </div>
+
+    <div style="font-size:75px">💑</div>
+
+    <p>
+        Some people make life beautiful...
+        <br>
+        And you are one of those special people. ❤️
+    </p>
+
+    <button class="btn" onclick="nextPage(3)">
+        NEXT 💕
+    </button>
+
+</div>
+
+<!-- PAGE 3: ROMANTIC WORD -->
+<div class="page" id="page3">
+
+    <div class="small">A MESSAGE FROM THE HEART</div>
+
+    <div style="font-size:65px">🌹</div>
+
+    <div class="romantic-word">MOHABBAT ❤️</div>
+
+    <h2>Sirf Tum... Maryam!</h2>
+
+    <div class="message">
+
+        <p>
+            Tum meri zindagi ka woh khoobsurat ehsaas ho
+            jise lafzon mein bayan karna mushkil hai.
+        </p>
+
+        <p>
+            Tumhari muskurahat meri khushi hai,
+            tumhari baatein mera sukoon hain,
+            aur tumhari khushi mere liye bohat khaas hai.
+        </p>
+
+        <p>
+            Main chahta hoon ke hamari kahani
+            hamesha mohabbat, izzat aur bharose se bhari rahe.
+        </p>
+
+        <h2>Abdullah ❤️ Maryam</h2>
+
+        <p>Forever A Beautiful Love Story! 💞</p>
+
+    </div>
+
+    <button class="btn" onclick="nextPage(4)">
+        NEXT SURPRISE 🎁
+    </button>
+
+</div>
+
+<!-- PAGE 4: LOVE PROMISE -->
+<div class="page" id="page4">
+
+    <div class="small">A PROMISE FROM MY HEART</div>
+
+    <h2>For You, Maryam 🌹</h2>
+
+    <div style="font-size:80px">💝</div>
+
+    <div class="message">
+        <p>
+            I don't promise a perfect life,
+            but I wish to fill every moment
+            with kindness, respect and care.
+        </p>
+
+        <p>
+            May we always keep smiling,
+            understand each other and create
+            beautiful memories together.
+        </p>
+
+        <h2>YOU ARE SPECIAL ❤️</h2>
+    </div>
+
+    <button class="btn" onclick="nextPage(5)">
+        LAST SURPRISE 🌹
+    </button>
+
+</div>
+
+<!-- PAGE 5: ROMANTIC PHOTOS -->
+<div class="page" id="page5">
+
+    <div class="small">OUR WORLD OF LOVE</div>
+
+    <h1>Abdullah ❤️ Maryam</h1>
+
+    <p>Beautiful moments, beautiful feelings, beautiful love. 💗</p>
+
+    <div class="gallery">
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=700" alt="Romantic roses">
+            <p>🌹 A Rose For You</p>
+        </div>
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=700" alt="Romantic couple">
+            <p>❤️ Together Forever</p>
+        </div>
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=700" alt="Love lights">
+            <p>✨ You Are My Light</p>
+        </div>
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=700" alt="Love couple">
+            <p>💕 A Beautiful Feeling</p>
+        </div>
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=700" alt="Beautiful flowers">
+            <p>🌸 Flowers For My Love</p>
+        </div>
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=700" alt="Red rose">
+            <p>💗 Endless Love</p>
+        </div>
+
+    </div>
+
+    <div style="margin-top:55px">
+        <h2>One Last Thing...</h2>
+        <div class="romantic-word">I LOVE YOU ❤️</div>
+        <p>Made with endless love by Abdullah.</p>
+        <p>For Maryam, Always and Forever. 💍</p>
+    </div>
+
+    <button class="btn" onclick="nextPage(1)">
+        REPLAY OUR STORY 💞
+    </button>
+
+</div>
+
+<footer>
+    Abdullah ❤️ Maryam
+    <br>
+    Made With Love 🌹
+    <br>
+    Our Story, Our Hearts, Forever.
+</footer>
+
+<script>
+
+// PAGE NAVIGATION
+function nextPage(number) {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.getElementById("page" + number).classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    if (number === 5) {
+        for (let i = 0; i < 35; i++) {
+            setTimeout(createFloatingHeart, i * 100);
+        }
+    }
+}
+
+// FLOATING HEARTS
+function createFloatingHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+    heart.innerHTML = ["❤️","💗","💕","💖","🌹"][Math.floor(Math.random()*5)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+    heart.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 9000);
+}
+
+setInterval(createFloatingHeart, 500);
+
+// BACKGROUND PARTICLES
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+}
+
+resize();
+window.addEventListener("resize", resize);
+
+let stars = Array.from({length: 65}, () => ({
+    x: Math.random() * innerWidth,
+    y: Math.random() * innerHeight,
+    r: Math.random() * 2 + 1,
+    a: Math.random()
+}));
+
+function animateStars() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    stars.forEach(s => {
+
+        s.a += 0.015;
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,150,200,${0.3 + Math.abs(Math.sin(s.a))*0.7})`;
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(animateStars);
+}
+
+animateStars();
+
+
+// ORIGINAL ROMANTIC INSTRUMENTAL MUSIC
+// Music starts only after clicking the music button.
+
+let audio = null;
+let musicTimer = null;
+let musicOn = false;
+let step = 0;
+
+const notes = [
+    261.63, 329.63, 392.00, 523.25,
+    392.00, 329.63, 293.66, 349.23,
+    440.00, 523.25, 440.00, 349.23,
+    261.63, 329.63, 392.00, 329.63
+];
+
+function playRomanticNote() {
+
+    if (!audio || !musicOn) return;
+
+    const now = audio.currentTime;
+
+    const melody = audio.createOscillator();
+    const volume = audio.createGain();
+
+    melody.type = "sine";
+    melody.frequency.value = notes[step % notes.length];
+
+    volume.gain.setValueAtTime(0.0001, now);
+    volume.gain.linearRampToValueAtTime(0.045, now + 0.15);
+    volume.gain.exponentialRampToValueAtTime(0.0001, now + 1.3);
+
+    melody.connect(volume);
+    volume.connect(audio.destination);
+
+    melody.start(now);
+    melody.stop(now + 1.4);
+
+    // Soft background harmony
+    if (step % 4 === 0) {
+
+        const bass = audio.createOscillator();
+        const bassVolume = audio.createGain();
+
+        bass.type = "triangle";
+        bass.frequency.value = notes[step % notes.length] / 2;
+
+        bassVolume.gain.setValueAtTime(0.0001, now);
+        bassVolume.gain.linearRampToValueAtTime(0.018, now + 0.2);
+        bassVolume.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
+
+        bass.connect(bassVolume);
+        bassVolume.connect(audio.destination);
+
+        bass.start(now);
+        bass.stop(now + 1.9);
+    }
+
+    step++;
+}
+
+async function toggleMusic() {
+
+    if (!audio) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audio = new AudioContext();
+    }
+
+    if (audio.state === "suspended") {
+        await audio.resume();
+    }
+
+    const button = document.getElementById("musicBtn");
+
+    musicOn = !musicOn;
+
+    if (musicOn) {
+        playRomanticNote();
+        musicTimer = setInterval(playRomanticNote, 650);
+        button.innerText = "🔊 Music ON";
+    } else {
+        clearInterval(musicTimer);
+        button.innerText = "🎵 Play Romantic Music";
+    }
+}
+
+</script>
+
+</body>
+</html>
